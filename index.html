@@ -128,6 +128,7 @@ h2 em { font-style: normal; color: var(--rain); }
 .carving dl > div { display: grid; gap: 1.2cqw; }
 .carving dt { font: 700 3.5cqw/1.1 var(--display); letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; opacity: .78; }
 .carving dd { margin: 0; font: 700 5.2cqw/1.1 var(--display); letter-spacing: .04em; }
+.carving dd.c-addr { font: 600 3.3cqw/1.35 "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: 0; word-break: break-all; }
 .carving dd.later { font: italic 400 4.2cqw/1.1 Georgia, "Times New Roman", serif; letter-spacing: .02em; opacity: .7; }
 
 footer .wrap { padding-block: 40px 56px; display: grid; gap: 14px; border-top: 1px dashed rgba(235,231,240,.18); }
@@ -161,8 +162,8 @@ footer .mark { font-size: 16px; }
         </div>
         <div class="ca">
           <span>$LITHO contract</span>
-          <code id="ca">Posted here at launch</code>
-          <button class="btn" type="button" id="copy" disabled style="padding:8px 12px;font-size:12px">Copy</button>
+          <code id="ca">0x2eDd44C3F1E1B3c57ef7331737700450a2E9bd2a</code>
+          <button class="btn" type="button" id="copy" style="padding:8px 12px;font-size:12px">Copy</button>
         </div>
       </div>
       <figure class="stage" id="stage-fig">
@@ -232,7 +233,7 @@ footer .mark { font-size: 16px; }
       <div class="token-text">
         <span class="kicker">Token facts</span>
         <h2>Carved <em>in stone</em></h2>
-        <p>One billion pieces of marble, 2% on the way in, 2% on the way out. Only the contract is still waiting for launch day.</p>
+        <p>One billion pieces of marble, 2% on the way in, 2% on the way out. His seal is carved at the bottom of the stele.</p>
         <p class="warn"><b>Only trust the contract address carved here and on Litho's official X account, <a href="https://x.com/LithoOnElysium" target="_blank" rel="noopener">@LithoOnElysium</a>.</b> Look-alike tokens show up on launch day.</p>
         <p class="glow-note">The light behind the stele grows with every crack you put in Litho: <b id="stele-n">0</b> so far.</p>
       </div>
@@ -246,7 +247,7 @@ footer .mark { font-size: 16px; }
             <div><dt>Network</dt><dd>Elysium</dd></div>
             <div><dt>Supply</dt><dd>1B</dd></div>
             <div><dt>Tax</dt><dd>2% buy · 2% sell</dd></div>
-            <div><dt>Contract</dt><dd class="later">carved at launch</dd></div>
+            <div><dt>Contract</dt><dd class="c-addr" title="0x2eDd44C3F1E1B3c57ef7331737700450a2E9bd2a">0x2eDd44C3F1E1B3c57ef7<br>331737700450a2E9bd2a</dd></div>
           </dl>
         </div>
       </figure>
@@ -610,6 +611,19 @@ footer .mark { font-size: 16px; }
   let n = 0; try { n = JSON.parse(localStorage.getItem("litho5-total") || "0") || 0; } catch (e) {}
   set(n);
   addEventListener("litho:cracks", e => set(e.detail));
+})();
+</script>
+
+<script>
+(() => {
+  const btn = document.getElementById("copy"), code = document.getElementById("ca");
+  if (!btn || !code) return;
+  btn.addEventListener("click", async () => {
+    const text = code.textContent.trim();
+    try { await navigator.clipboard.writeText(text); btn.textContent = "Copied"; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(code); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); btn.textContent = "Selected"; }
+    setTimeout(() => { btn.textContent = "Copy"; }, 1600);
+  });
 })();
 </script>
 

@@ -16,6 +16,6 @@ A small marble statue woke up in the Elysian Fields. Tap, drag or flick his head
 2. In the repository: Settings → Pages → Source: "Deploy from a branch", branch `main`, folder `/ (root)`.
 3. The site goes live at `https://<your-username>.github.io/<repo-name>/` after a minute.
 
-## Before launch
+## Contract
 
-Add the contract address in `index.html`: search for `at launch` (the box under the buttons and the Contract line on the stele).
+`0x2eDd44C3F1E1B3c57ef7331737700450a2E9bd2a`
